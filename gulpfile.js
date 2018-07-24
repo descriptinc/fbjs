@@ -97,18 +97,12 @@ gulp.task('flow', function() {
     .pipe(gulp.dest(paths.lib.dest));
 });
 
-gulp.task('check-dependencies', function() {
-  return gulp
-    .src('package.json')
-    .pipe(gulpCheckDependencies());
-});
-
 gulp.task('watch', function() {
   gulp.watch(paths.src, ['lib', 'flow']);
 });
 
 gulp.task('build', function(cb) {
-  runSequence('check-dependencies', 'clean', ['lib', 'flow'], cb);
+  runSequence('clean', ['lib', 'flow'], cb);
 });
 
 gulp.task('default', ['build']);

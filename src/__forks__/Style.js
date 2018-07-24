@@ -50,7 +50,11 @@ var Style = {
     while (node && node !== ownerDocument.body) {
       if (_isNodeScrollable(node, 'overflow') ||
           _isNodeScrollable(node, 'overflowY') ||
-          _isNodeScrollable(node, 'overflowX')) {
+          _isNodeScrollable(node, 'overflowX') ||
+          // fixes for perfect scrollbar
+          (node.className && (
+            node.className.indexOf('scrollbar-container') > -1 ||
+            node.className.indexOf('ps--active--') > -1))) {
         return node;
       }
       node = node.parentNode;
